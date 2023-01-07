@@ -1,0 +1,136 @@
+import React from "react";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+const labels = ["11 - 6", "13 - 12", "15 - 14", "20 - 16", "13 - 11"].reverse();
+
+const TotalSex = ({ result }) => {
+  let arr15 = result
+
+    ?.filter((a) => a["النوع"] == "ذكور")
+
+    ?.reduce((acc, val) => acc + Number(val["13 - 11"]), 0);
+  let arr16 = result
+
+    ?.filter((a) => a["النوع"] == "ذكور")
+
+    ?.reduce((acc, val) => acc + Number(val["20 - 16"]), 0);
+
+  let arr17 = result
+
+    ?.filter((a) => a["النوع"] == "ذكور")
+
+    ?.reduce((acc, val) => acc + Number(val["15 - 14"]), 0);
+  let arr18 = result
+
+    ?.filter((a) => a["النوع"] == "ذكور")
+
+    ?.reduce((acc, val) => acc + Number(val["13 - 12"]), 0);
+  let arr19 = result
+
+    ?.filter((a) => a["النوع"] == "ذكور")
+
+    ?.reduce((acc, val) => acc + Number(val["11 - 6"]), 0);
+  let arrF15 = result
+
+    ?.filter((a) => a["النوع"] == "إناث")
+
+    ?.reduce((acc, val) => acc + Number(val["13 - 11"]), 0);
+  let arrF16 = result
+
+    ?.filter((a) => a["النوع"] == "إناث")
+
+    ?.reduce((acc, val) => acc + Number(val["20 - 16"]), 0);
+
+  let arrF17 = result
+
+    ?.filter((a) => a["النوع"] == "إناث")
+
+    ?.reduce((acc, val) => acc + Number(val["15 - 14"]), 0);
+  let arrF18 = result
+
+    ?.filter((a) => a["النوع"] == "إناث")
+
+    ?.reduce((acc, val) => acc + Number(val["13 - 12"]), 0);
+  let arrF19 = result
+
+    ?.filter((a) => a["النوع"] == "إناث")
+
+    ?.reduce((acc, val) => acc + Number(val["11 - 6"]), 0);
+  const arrMale = [arr15, arr16, arr17, arr18, arr19];
+  //console.log(arrMale);
+
+  const arrFemale = [arrF15, arrF16, arrF17, arrF18, arrF19];
+
+  const options = {
+    responsive: true,
+
+    scales: {
+      y: {
+        ticks: {
+          color: "black",
+          font: {
+            size: 10,
+          },
+        },
+      },
+      x: {
+        ticks: {
+          color: "black",
+          font: {
+            size: 10,
+          },
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+      },
+    },
+  };
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: " ذكور",
+        data: arrMale?.map((x) => x),
+        borderColor: "#0e4c92",
+        backgroundColor: "#0e4c92",
+      },
+      {
+        label: " إناث",
+        data: arrFemale?.map((x) => x),
+        borderColor: "red",
+        backgroundColor: "red",
+      },
+    ],
+  };
+  return (
+    <>
+      <Bar options={options} data={data} />
+    </>
+  );
+};
+
+export default TotalSex;
